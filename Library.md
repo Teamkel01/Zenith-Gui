@@ -82,6 +82,7 @@ function Library:Init(options)
 	zenith.Name = "zenith"
 	zenith.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	zenith.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    zenith.ResetOnSpawn = false
 
 	TopBar.Name = "TopBar"
 	TopBar.Parent = zenith
@@ -934,6 +935,11 @@ UIS.InputChanged:Connect(function(input)
 		end
 	end
 end)
+
+
+
+
+
 
 
 
