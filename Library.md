@@ -591,7 +591,7 @@ function GUI:Slider(options, parentFrame)
 	TextLabel_2.Position = UDim2.new(0, 0, -0.300000101, 0)
 	TextLabel_2.Size = UDim2.new(0.921985805, 0, 0, 35)
 	TextLabel_2.Font = Enum.Font.Ubuntu
-	TextLabel_2.Text = "Slider"
+	TextLabel_2.Text = options.text
 	TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 	TextLabel_2.TextSize = 14.000
 	TextLabel_2.TextWrapped = true
