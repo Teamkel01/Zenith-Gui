@@ -1019,6 +1019,19 @@ local Slider = GUI:Slider({
 }, section)
 ```
 
+## Adding a Drop Down
+
+```lua
+local dropdown1 = GUI:Dropdown({
+	text = "Dropdown",
+	Options = {"1", "2", "3"},
+	Default = "1",
+	Callback = function(value)
+		
+	end
+}, section)
+```
+
 ## Creating a Notification
 
 ```lua
