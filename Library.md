@@ -5,6 +5,7 @@ This library isnt fully finished.
 ## Starting the Library
 
 ```lua
+
 UIS = game:GetService('UserInputService')
 local players = game:GetService("Players")
 local tweenService = game:GetService("TweenService")
@@ -51,6 +52,11 @@ local ImageLabel = Instance.new("ImageLabel")
 local UICorner69 = Instance.new("UICorner")
 local blur = Instance.new("BlurEffect")
 
+local mobilegui = Instance.new("ScreenGui")
+local mobilebutton = Instance.new("TextButton")
+local UICorner420 = Instance.new("UICorner")
+local uiScale = Instance.new("UIScale")
+
 local Closed = false
 local ToggleActive = false
 
@@ -96,8 +102,8 @@ UIS.InputBegan:Connect(function(input)
 	end
 end)
 
-		
-		
+
+
 
 
 function Library:Init(options) 
@@ -106,7 +112,7 @@ function Library:Init(options)
 	}, options or {})
 
 	local GUI = {}
-	
+
 	blur.Parent = game.Lighting
 
 	zenith.Name = "zenith"
@@ -114,6 +120,45 @@ function Library:Init(options)
 	zenith.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	zenith.ResetOnSpawn = false
 	zenith.ZIndexBehavior = Enum.ZIndexBehavior.Global
+	
+	if UIS.TouchEnabled then
+	
+	mobilegui.Name = "zenithmobile"
+	mobilegui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	mobilegui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	mobilegui.ResetOnSpawn = false
+	mobilegui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+	
+		uiScale.Scale = 0.6
+		uiScale.Parent = TopBar 
+	
+	mobilebutton.Name = "mobilebutton"
+	mobilebutton.Parent = mobilegui
+	mobilebutton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	mobilebutton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	mobilebutton.BorderSizePixel = 0
+	mobilebutton.Position = UDim2.new(0.1, 0, 0.1, 0)
+	mobilebutton.Size = UDim2.new(0, 35, 0, 35)
+	mobilebutton.Font = Enum.Font.Ubuntu
+	mobilebutton.Text = "Z"
+	mobilebutton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	mobilebutton.TextSize = 35
+	mobilebutton.TextWrapped = true
+	mobilebutton.MouseButton1Down:Connect(function()
+		if blur.Size == 24 then
+			local tween = game:GetService("TweenService"):Create(blur, TweenInfo.new(0.5), {Size = 0})
+			tween:Play()
+			zenith.Enabled = false
+		else
+			local tween2 = game:GetService("TweenService"):Create(blur, TweenInfo.new(0.5), {Size = 24})
+			tween2:Play()
+			zenith.Enabled = true
+		end
+	end)
+	
+	end
+	
+	UICorner420.Parent = mobilebutton
 
 	TopBar.Name = "TopBar"
 	TopBar.Parent = zenith
@@ -122,6 +167,7 @@ function Library:Init(options)
 	TopBar.BorderSizePixel = 0
 	TopBar.Position = UDim2.new(0.400000006, 0, 0.25, 0)
 	TopBar.Size = UDim2.new(0, 501, 0, 50)
+
 
 	UICorner.Parent = TopBar
 	UICorner.CornerRadius = UDim.new(0,3)
@@ -137,7 +183,7 @@ function Library:Init(options)
 
 	UICorner_2.Parent = Main
 	UICorner_2.CornerRadius = UDim.new(0,3)
-	
+
 
 	Cover1.Name = "Cover1"
 	Cover1.Parent = Main
@@ -146,7 +192,7 @@ function Library:Init(options)
 	Cover1.BorderSizePixel = 0
 	Cover1.Position = UDim2.new(0.959285557, 0, 0, 0)
 	Cover1.Size = UDim2.new(0, 8, 0, 50)
-	
+
 	Covermain.Name = "Cover2"
 	Covermain.Parent = Main
 	Covermain.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
@@ -180,7 +226,7 @@ function Library:Init(options)
 
 	UICorner_4.Parent = Background
 	UICorner_4.CornerRadius = UDim.new(0,3)
-	
+
 
 	Cover.Name = "Cover"
 	Cover.Parent = Background
@@ -231,7 +277,7 @@ function Library:Init(options)
 	tabframe.Position = UDim2.new(0, 0, 0.114545457, 0)
 	tabframe.Size = UDim2.new(0, 192, 0, 425)
 	tabframe.ScrollBarThickness = 0
-	
+
 	scrollline.Name = "line"
 	scrollline.Parent = Main
 	scrollline.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
@@ -244,7 +290,7 @@ function Library:Init(options)
 	layouttab.Parent = tabframe
 	layouttab.SortOrder = Enum.SortOrder.LayoutOrder
 	layouttab.Padding = UDim.new(0, 10)
-	
+
 	Label.Parent = Main
 	Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Label.BackgroundTransparency = 1.000
@@ -266,7 +312,7 @@ function Library:Init(options)
 	ImageLabel.Position = UDim2.new(0.0299999993, 0, 0.903636336, 0)
 	ImageLabel.Size = UDim2.new(0, 44, 0, 44)
 	ImageLabel.Image = players:GetUserThumbnailAsync(players.LocalPlayer.UserId,Enum.ThumbnailType.AvatarBust,Enum.ThumbnailSize.Size420x420)
-	
+
 
 	UICorner69.CornerRadius = UDim.new(1, 0)
 	UICorner69.Parent = ImageLabel
@@ -457,7 +503,7 @@ function GUI:Button(options, parentFrame)
 	button.Size = UDim2.new(0.96, 0, 0, 35)
 	button.ClipsDescendants = true
 	button.AutoButtonColor = false
-	
+
 
 	local UICorner = Instance.new("UICorner")
 	UICorner.CornerRadius = UDim.new(0, 4)
@@ -933,9 +979,9 @@ function GUI:Dropdown(options, parentFrame)
 			dropdownbutton.AutoButtonColor = false
 
 			dropdownbutton.MouseButton1Click:Connect(function()
-				
+
 				local TweenService = game:GetService("TweenService")
-				
+
 				TextLabel_2.Text = item
 				TweenService:Create(Arrow, TweenInfo.new(0.25), {Rotation = 0}):Play()
 				TweenService:Create(Framee, TweenInfo.new(0.25), {Size = UDim2.new(0, 120, 0, 0)}):Play()
@@ -944,7 +990,7 @@ function GUI:Dropdown(options, parentFrame)
 				options.Callback(item)
 			end)
 		end
-		end
+	end
 
 	-- Set default if exists
 	local selectedValue = options.Default or ""
@@ -1197,30 +1243,9 @@ UIS.InputChanged:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 		if dragToggle then
 			updateInput(input)
-		end
+		end	
 	end
 end)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
