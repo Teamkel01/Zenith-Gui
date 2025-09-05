@@ -116,7 +116,7 @@ function Library:Init(options)
 	blur.Parent = game.Lighting
 
 	zenith.Name = "zenith"
-	zenith.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	zenith.Parent = coreGui
 	zenith.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	zenith.ResetOnSpawn = false
 	zenith.ZIndexBehavior = Enum.ZIndexBehavior.Global
@@ -124,7 +124,7 @@ function Library:Init(options)
 	if UIS.TouchEnabled then
 	
 	mobilegui.Name = "zenithmobile"
-	mobilegui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	mobilegui.Parent = coreGui
 	mobilegui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	mobilegui.ResetOnSpawn = false
 	mobilegui.ZIndexBehavior = Enum.ZIndexBehavior.Global
