@@ -481,17 +481,9 @@ function GUI:Button(options, parentFrame)
 		initialPosition = nil  
 	}, options or {})
 
-	local buttonParent = parentFrame
-
-	local buttonCount = #buttonParent:GetChildren()
-	local buttonYPosition = -40 + buttonCount * 40
-	if buttonCount == 0 then
-		buttonYPosition = 0
-	end
-
 	local button = Instance.new("TextButton")
 	button.Name = "Button"
-	button.Parent = buttonParent
+	button.Parent = parentFrame
 	button.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 	button.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	button.Font = Enum.Font.Ubuntu
@@ -499,7 +491,7 @@ function GUI:Button(options, parentFrame)
 	button.TextSize = 15
 	button.TextColor3 = Color3.fromRGB(255, 255, 255)
 	button.BorderSizePixel = 0
-	button.Position = UDim2.new(0.02, 0, 0, buttonYPosition)
+	button.Position = UDim2.new(0, 0, 0, 0)
 	button.Size = UDim2.new(0.96, 0, 0, 35)
 	button.ClipsDescendants = true
 	button.AutoButtonColor = false
@@ -509,7 +501,6 @@ function GUI:Button(options, parentFrame)
 	UICorner.CornerRadius = UDim.new(0, 4)
 	UICorner.Parent = button
 
-	-- Add ripple base template (invisible)
 	local rippleTemplate = Instance.new("Frame")
 	rippleTemplate.Name = "Ripple"
 	rippleTemplate.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
@@ -564,30 +555,18 @@ end
 
 
 
-
-
-
 function GUI:Toggle(options, parentFrame)
 	options = options or {}
 	local text = options.text or "Toggle"
 	local callback = options.callback or function(state) end
 
-
-	local toggleParent = parentFrame
-
-	local toggleCount = #toggleParent:GetChildren()
-	local toggleYPosition = -40 + toggleCount * 40  -- Base Y position for subsequent buttons
-	if toggleCount == 0 then
-		toggleYPosition = 0  -- Adjust Y position for the first button
-	end
-
 	local ToggleInactive = Instance.new("Frame")
 	ToggleInactive.Name = "ToggleInactive"
-	ToggleInactive.Parent = toggleParent
+	ToggleInactive.Parent = parentFrame
 	ToggleInactive.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 	ToggleInactive.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	ToggleInactive.BorderSizePixel = 0
-	ToggleInactive.Position = UDim2.new(0.02, 0, 0, toggleYPosition)
+	ToggleInactive.Position = UDim2.new(0.02, 0, 0, 0)
 	ToggleInactive.Size = UDim2.new(0.96, 0, 0, 35)
 
 	local UICorner_10 = Instance.new("UICorner")
@@ -677,21 +656,13 @@ function GUI:Slider(options, parentFrame)
 
 	local slider = {}
 
-	-- Calculate the Y position based on the number of existing sliders
-	local sliderCount = #parentFrame:GetChildren()
-	local sliderYPosition = -27 + sliderCount * 37
-	if sliderCount == 0 then
-		sliderYPosition = 0  -- Adjust Y position for the first slider
-	end
-
-
 	local Slider = Instance.new("Frame")
 	Slider.Name = "Slider"
 	Slider.Parent = parentFrame
 	Slider.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 	Slider.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Slider.BorderSizePixel = 0
-	Slider.Position = UDim2.new(0.02, 0, 0, sliderYPosition)
+	Slider.Position = UDim2.new(0.02, 0, 0, 0)
 	Slider.Size = UDim2.new(0.96, 0, 0, 50)
 
 	local UICorner_6 = Instance.new("UICorner")
@@ -781,7 +752,7 @@ function GUI:Slider(options, parentFrame)
 	local startMousePosition = nil
 	local sliderValue = options.default
 
-	local sliderTweenTime = 0.1  -- Smoothness of slider animation
+	local sliderTweenTime = 0.1
 
 	-- Methods
 	function slider:SetValue(value)
@@ -810,7 +781,6 @@ function GUI:Slider(options, parentFrame)
 		sliderValue = newValue
 	end
 
-	-- Drag start
 	local function onInputBegan(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 then
 			dragging = true
@@ -851,19 +821,12 @@ function GUI:Dropdown(options, parentFrame)
 		initialPosition = nil  
 	}, options or {})
 
-	local dropdown = parentFrame
-	local dropdownCount = #dropdown:GetChildren()
-	local dropdownYPosition = -35 + dropdownCount * 35
-	if dropdownCount == 0 then
-		dropdownYPosition = 0
-	end
-
 	local DropDown = Instance.new("Frame")
 	DropDown.Name = "DropDown"
-	DropDown.Parent = dropdown
+	DropDown.Parent = parentFrame
 	DropDown.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 	DropDown.BorderSizePixel = 0
-	DropDown.Position = UDim2.new(0.02, 0, 0, dropdownYPosition)
+	DropDown.Position = UDim2.new(0.02, 0, 0, 0)
 	DropDown.Size = UDim2.new(0.96, 0, 0, 40)
 	DropDown.ClipsDescendants = false
 	DropDown.ZIndex = 1
@@ -1022,7 +985,7 @@ end
 
 function GUI:Section(options, tab)
 	options = Library:validate({
-		text = "Section"  -- Change 'name' to 'text'
+		text = "Section"
 	}, options or {})
 
 	local SectionFrame = Instance.new("Frame")
@@ -1033,10 +996,6 @@ function GUI:Section(options, tab)
 	SectionFrame.BorderSizePixel = 0
 	SectionFrame.ClipsDescendants = false
 
-	local UICorner_2 = Instance.new("UICorner")
-	UICorner_2.CornerRadius = UDim.new(0, 5)
-	UICorner_2.Parent = SectionFrame
-
 	local Section = Instance.new("TextLabel")
 	Section.Name = "Section"
 	Section.Parent = SectionFrame
@@ -1044,35 +1003,48 @@ function GUI:Section(options, tab)
 	Section.BackgroundTransparency = 1.000
 	Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Section.BorderSizePixel = 0
-	Section.Size = UDim2.new(1, 0, 0, 35) -- Adjusted size to fit the text
+	Section.Size = UDim2.new(1, 0, 0, 35)
 	Section.Font = Enum.Font.GothamBold
-	Section.Text = options.text  -- Change from options.name to options.text
+	Section.Text = options.text
 	Section.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Section.TextSize = 15.000
 	Section.TextXAlignment = Enum.TextXAlignment.Left
 	Section.ClipsDescendants = false
 
+	local UICorner_2 = Instance.new("UICorner")
+	UICorner_2.CornerRadius = UDim.new(0, 5)
+	UICorner_2.Parent = SectionFrame
+	
+	local UIListLayout = Instance.new("UIListLayout")
+	UIListLayout.Parent = SectionFrame
+	UIListLayout.Padding = UDim.new(0, 5)
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
 	local sectionPadding = Instance.new("UIPadding")
-	sectionPadding.Parent = Section
-	sectionPadding.PaddingLeft = UDim.new(0, 5)  -- Adjust this value to move the text to the right
+	sectionPadding.Parent = SectionFrame
+	sectionPadding.PaddingLeft = UDim.new(0.02, 0)
 
-	local function updateSectionSize()
-		local totalHeight = Section.Size.Y.Offset + 5
-		for _, child in ipairs(SectionFrame:GetChildren()) do
-			if child:IsA("TextLabel") or child:IsA("TextButton") or child:IsA("Frame") then
-				totalHeight = totalHeight + child.Size.Y.Offset + 5 -- Add 5 pixels of padding between elements
-			end
-			if child.Name == "SliderFrame" then
-				totalHeight = totalHeight + 15 -- Adjust height for sliders
-			end
-		end
-		SectionFrame.Size = UDim2.new(1, 0, 0, totalHeight)
-	end
+local function updateSectionSize()
+    local baseHeight = 50
+    local totalHeight = baseHeight
 
-	SectionFrame.ChildAdded:Connect(updateSectionSize)
-	SectionFrame.ChildRemoved:Connect(updateSectionSize)
+    for _, child in ipairs(SectionFrame:GetChildren()) do
+        if child:IsA("TextLabel") or child:IsA("TextButton") or child:IsA("Frame") then
+            totalHeight = totalHeight + child.Size.Y.Offset + 5
+        end
+    end
 
-	return SectionFrame
+    SectionFrame.Size = UDim2.new(1, 0, 0, totalHeight)
+end
+
+SectionFrame.ChildAdded:Connect(updateSectionSize)
+SectionFrame.ChildRemoved:Connect(updateSectionSize)
+
+-- Initial size update
+updateSectionSize()
+
+return SectionFrame
+
 end
 
 
