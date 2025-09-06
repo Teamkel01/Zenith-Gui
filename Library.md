@@ -88,7 +88,7 @@ local tweenInfo = TweenInfo.new(
 
 UIS.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.Keyboard then
-		if input.KeyCode == Enum.KeyCode.Insert then
+		if input.KeyCode == Enum.KeyCode.Tab then
 			if blur.Size == 24 then
 				local tween = game:GetService("TweenService"):Create(blur, TweenInfo.new(0.5), {Size = 0})
 				tween:Play()
